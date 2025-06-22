@@ -5,28 +5,26 @@
   box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-background-image: url('https://www.transparenttextures.com/patterns/brick-wall.png');
 
-
-/* Body styling */
+/* Background image texture */
 body {
   font-family: 'Raleway', sans-serif;
   background-color: #0a0a0a;
   color: #fff;
+  overflow-x: hidden;
 }
+
 h1, h2, h3 {
   font-family: 'JetBrains Mono', monospace;
 }
-/* Make sure all text is readable */
+
 h1, h2, h3, p, span {
   color: #ffffff;
 }
 
-/* Fix motivational text */
 .motivational {
   color: #ffffff;
 }
-
 
 /* Main container */
 .container {
@@ -107,8 +105,26 @@ h1, h2, h3, p, span {
 }
 
 .confession-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0, 255, 170, 0.4);
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 8px 20px #ff66cc77;
+}
+
+.confession-card button {
+  padding: 10px 16px;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(3px);
+}
+
+.confession-card button:hover {
+  background-color: #ff66cc;
+  color: #0a0a0a;
+  box-shadow: 0 0 10px #ff66cc55;
 }
 
 @keyframes fadeIn {
@@ -121,6 +137,7 @@ h1, h2, h3, p, span {
   100% { transform: scale(1); opacity: 1; }
 }
 
+/* Navbar */
 .nav-links {
   list-style: none;
   display: flex;
@@ -133,6 +150,7 @@ h1, h2, h3, p, span {
   font-weight: bold;
 }
 
+/* Motivation message box */
 .messages-box {
   background-color: #262626;
   padding: 20px;
@@ -144,6 +162,7 @@ h1, h2, h3, p, span {
   line-height: 1.6;
 }
 
+/* Search bar */
 .search-bar {
   margin-bottom: 20px;
   text-align: center;
@@ -159,6 +178,7 @@ h1, h2, h3, p, span {
   font-size: 16px;
 }
 
+/* Floating messages (ticker) */
 .floating-messages {
   position: absolute;
   top: 20px;
@@ -183,34 +203,24 @@ h1, h2, h3, p, span {
   100% { transform: translateX(-100%); }
 }
 
-.divider {
-  width: 100%;
-  height: 10px;
-  background: linear-gradient(90deg, transparent, #888, transparent);
-  margin: 2rem 0;
-  opacity: 0.5;
-  animation: glowDivider 3s linear infinite;
-}
-
-@keyframes glowDivider {
-  0% { background-position: 0%; }
-  100% { background-position: 100%; }
-}
-
+/* Particle canvas background fix */
 #particles-js, #particle-bg {
   position: fixed;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   top: 0;
   left: 0;
   z-index: -1;
+  background-color: #0a0a0a;
 }
 
 #particle-bg {
   z-index: -2;
+  pointer-events: none;
   background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
 }
 
+/* Scroll fade-in */
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
@@ -222,6 +232,92 @@ h1, h2, h3, p, span {
   transform: translateY(0);
 }
 
+/* Like pulse */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.liked {
+  animation: pulse 0.3s ease;
+}
+
+/* Motivational text glow */
+@keyframes glowText {
+  0% { text-shadow: 0 0 5px #00ffaa; }
+  100% { text-shadow: 0 0 20px #ff66cc; }
+}
+
+.motivational {
+  animation: glowText 3s infinite alternate ease-in-out;
+}
+
+/* Thank you popup */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(30, 10, 40, 0.9);
+  color: #fff;
+  padding: 25px 40px;
+  border-radius: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 0 25px #ff66cc88;
+  text-align: center;
+  z-index: 9999;
+  animation: popIn 0.5s ease;
+}
+
+/* Comment Box Styling */
+.comment-box textarea.styled-comment {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #1a1a1a;
+  color: white;
+  border: 2px solid #00ffaa;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  resize: vertical;
+}
+
+.comment-box textarea.styled-comment::placeholder {
+  color: #aaa;
+}
+
+.comment-box .styled-comment-btn {
+  padding: 10px 16px;
+  font-size: 1rem;
+  background-color: #ff66cc;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  width: 100%;
+}
+
+.comment-box .styled-comment-btn:hover {
+  background-color: #e055b8;
+  box-shadow: 0 0 10px #ff66cc55;
+}
+
+.comment-box .comment {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #eee;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 8px;
+  font-size: 0.95rem;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
@@ -247,91 +343,41 @@ h1, h2, h3, p, span {
     gap: 10px;
   }
 }
-.confession-card button {
-  padding: 10px 16px;
-  font-size: 1rem;
-  background-color: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(3px);
-}
 
-.confession-card button:hover {
-  background-color: #ff66cc;
-  color: #0a0a0a;
-  box-shadow: 0 0 10px #ff66cc55;
-}
-h1, h2, h3, p, span {
-  color: #ffffff;
-}
-.motivational {
-  color: #ffffff;
-}
-@keyframes pulse {
-  0% {
-    transform: scale(1);
+@media (max-width: 480px) {
+  .navbar h1 {
+    font-size: 1.2rem;
+    text-align: center;
   }
-  50% {
-    transform: scale(1.2);
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
   }
-  100% {
-    transform: scale(1);
+
+  .confession-box textarea,
+  .search-bar input,
+  .comment-box textarea {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .confession-box button,
+  .styled-comment-btn {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .confession-card {
+    padding: 1rem;
+  }
+
+  .floating-messages {
+    font-size: 0.8rem;
+  }
+
+  .messages-box {
+    font-size: 0.95rem;
   }
 }
-
-.liked {
-  animation: pulse 0.3s ease;
-}
-/* Floating hover animation for cards */
-.confession-card:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 8px 20px #ff66cc77;
-}
-
-/* Glow on motivational messages */
-.motivational {
-  animation: glowText 3s infinite alternate ease-in-out;
-}
-@keyframes glowText {
-  0% { text-shadow: 0 0 5px #00ffaa; }
-  100% { text-shadow: 0 0 20px #ff66cc; }
-}
-
-/* Fade-in cards on scroll */
-.fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease-out;
-}
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(30, 10, 40, 0.9);
-  color: #fff;
-  padding: 25px 40px;
-  border-radius: 15px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  box-shadow: 0 0 25px #ff66cc88;
-  text-align: center;
-  z-index: 9999;
-  animation: popIn 0.5s ease;
-}
-
-
-
-
-
-
-
-
